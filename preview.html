@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Device preview · Smart Expressive Communication Band</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/preview.css">
+</head>
+<body>
+<div class="stage">
+  <header class="bar">
+    <span class="kicker">Device preview</span>
+    <div class="seg" role="group" aria-label="Device">
+      <button data-dev="phone" aria-pressed="true">Phone</button><button data-dev="tablet" aria-pressed="false">Tablet</button><button data-dev="desktop" aria-pressed="false">Desktop</button>
+    </div>
+    <button class="btn sm" id="rot">Rotate</button>
+    <label class="sr" for="pg">Page</label>
+    <select id="pg"><option value="index.html">Login</option><option value="mode.html">Mode selection</option><option value="dashboard.html">Dashboard</option></select>
+    <span class="dims" id="dims" aria-live="polite"></span>
+    <a href="index.html" target="_blank" rel="noopener">Open full page</a>
+  </header>
+  <div class="fit" id="fit"><div class="scaler" id="scaler"><div class="device" id="device" data-d="phone" data-o="port">
+    <div class="sbar" aria-hidden="true"><span id="sb-time">9:41</span><span class="batt"></span></div>
+    <iframe class="vp" id="vp" src="index.html" title="App preview"></iframe>
+  </div></div></div>
+</div>
+<script src="js/preview.js"></script>
+</body>
+</html>

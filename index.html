@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Smart Expressive Communication Band</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="page">
+<section class="screen wrap enter" id="s-login" aria-labelledby="login-h" tabindex="-1">
+  <div class="login">
+    <div class="brand-panel">
+      <div class="logo"><div class="logo-mark"><svg class="ic"><use href="#i-hand"/></svg></div><div><b>Smart Expressive<br>Communication Band</b><small>COMPANION APP</small></div></div>
+      <h1 id="login-h">Talk without waiting for an interpreter.</h1>
+      <ul class="facts">
+        <li><svg class="ic"><use href="#i-hand"/></svg><span>Two sensor gloves turn signs into text and speech. Hearing partners reply by voice.</span></li>
+        <li><svg class="ic"><use href="#i-lock"/></svg><span>No camera and no video. The app uses glove sensors and voice only.</span></li>
+        <li><svg class="ic"><use href="#i-vib"/></svg><span>Haptic buzzes and visual cues carry status and the speaker's tone.</span></li>
+      </ul>
+    </div>
+    <form class="form-card" id="login-form" novalidate>
+      <div class="tabs" role="tablist" aria-label="Account">
+        <button type="button" role="tab" id="tab-in" aria-selected="true">Log in</button>
+        <button type="button" role="tab" id="tab-up" aria-selected="false">Sign up</button>
+      </div>
+      <div><h2 id="form-h" style="font-size:26px">Welcome back</h2><p class="muted" id="form-sub">Log in to set up your gloves or join a conversation.</p></div>
+      <div class="field" id="f-name" hidden><label for="in-name">Your name</label><input class="input" id="in-name" autocomplete="name" placeholder="Maria Santos"></div>
+      <div class="field"><label for="in-email">Email</label><input class="input" id="in-email" type="email" autocomplete="email" placeholder="you@example.com" inputmode="email"></div>
+      <div class="field"><label for="in-pw">Password</label><div class="pw"><input class="input" id="in-pw" type="password" autocomplete="current-password" placeholder="At least 8 characters"><button type="button" id="pw-toggle" aria-label="Show password">Show</button></div></div>
+      <p class="err" id="login-err" role="alert"></p>
+      <button class="btn primary block" id="login-btn" type="submit">Log In</button>
+      <div style="text-align:center"><button class="link" type="button" id="demo-login">Continue with the demo account</button></div>
+      <p class="muted" style="font-size:13px;text-align:center">Your recognition data stays on the gloves. Only anonymized summaries reach caregivers.</p>
+    </form>
+  </div>
+</section>
+</div>
+<script src="js/utils.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/store.js"></script>
+<script src="js/data-service.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/login.js"></script>
+</body>
+</html>

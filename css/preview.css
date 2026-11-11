@@ -1,0 +1,24 @@
+/* preview.css: device-frame viewer. The app pages load inside an iframe, so media queries respond to the frame size. */
+html,body{height:100%}
+body{margin:0}
+.stage{height:100%;display:flex;flex-direction:column}
+.bar{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;padding:8px 16px;background:var(--surface);border-bottom:1px solid var(--line)}
+.bar select{min-height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);padding:0 10px;font-weight:700}
+.bar .dims{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:120px}
+.bar a{font-weight:700;color:var(--teal-ink)}
+.fit{flex:1;min-height:0;display:flex;justify-content:center;align-items:flex-start;padding:16px;overflow:auto}
+.scaler{flex:none;position:relative}
+.device{position:absolute;left:0;top:0;transform-origin:0 0;display:flex;flex-direction:column;background:#0A0E12}
+.device[data-d="phone"]{border-radius:52px;padding:0 12px 12px;box-shadow:0 0 0 2px #27313a,0 28px 60px rgba(0,0,0,.38)}
+.device[data-d="phone"][data-o="land"]{padding-top:12px}
+.device[data-d="tablet"]{border-radius:34px;padding:16px;box-shadow:0 0 0 2px #27313a,0 28px 60px rgba(0,0,0,.38)}
+.device[data-d="desktop"]{border-radius:18px;padding:10px 10px 26px;box-shadow:0 0 0 2px #27313a,0 28px 60px rgba(0,0,0,.38)}
+.sbar{height:36px;flex:none;background:#0A0E12;border-radius:50px 50px 0 0;display:flex;align-items:center;justify-content:space-between;padding:0 28px;color:#C9D4DC;font-size:13px;font-weight:700;position:relative}
+.sbar::after{content:"";position:absolute;left:50%;top:9px;width:96px;height:24px;border-radius:14px;background:#000;transform:translateX(-50%)}
+.device:not([data-d="phone"]) .sbar,.device[data-o="land"] .sbar{display:none}
+.batt{display:inline-block;width:24px;height:12px;border:1.5px solid #C9D4DC;border-radius:4px;position:relative;vertical-align:middle}
+.batt::after{content:"";position:absolute;inset:1.5px 6px 1.5px 1.5px;background:#C9D4DC;border-radius:1px}
+.vp{display:block;border:0;background:var(--bg)}
+.device[data-d="phone"] .vp{border-radius:34px}
+.device[data-d="tablet"] .vp{border-radius:18px}
+.device[data-d="desktop"] .vp{border-radius:8px}

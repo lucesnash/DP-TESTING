@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Smart Expressive Communication Band · Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/modal.css">
+<link rel="stylesheet" href="css/tour.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="page">
+<section class="screen wrap enter" id="s-dash" aria-labelledby="dash-h" tabindex="-1">
+  <div class="dh">
+    <div class="l"><button class="icon-btn" id="dash-back" aria-label="Change mode"><svg class="ic"><use href="#i-back"/></svg></button><span class="pill" id="mode-pill"></span></div>
+    <div class="r"><button class="icon-btn" id="tour-btn" type="button" aria-label="Replay the tutorial"><svg class="ic"><use href="#i-play"/></svg></button><button class="icon-btn" id="how-d" type="button" aria-label="How to use this app"><span class="hq" aria-hidden="true">?</span></button><button class="icon-btn" data-theme-toggle aria-label="Switch light or dark theme"><svg class="ic"><use href="#i-moon"/></svg></button></div>
+  </div>
+  <div class="hello"><h1 id="dash-h"></h1><p class="muted" id="dash-sub"></p></div>
+  <div class="dash">
+    <div>
+      <div class="devices" id="devices" aria-label="Device status"></div>
+      <div class="tiles" id="tiles"></div>
+      <button class="convo-entry" id="convo-entry" type="button" aria-label="Open conversation"></button>
+    </div>
+    <section class="live" id="live" aria-label="Conversation"></section>
+<div class="overlay" id="overlay" hidden><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-labelledby="sh-title"></div></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+<!-- QR libraries: qrcodejs draws the QR code, jsQR reads it on browsers without BarcodeDetector (Safari, Firefox) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
+<script src="js/utils.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/store.js"></script>
+<script src="js/data.js"></script>
+<script src="js/data-service.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/help.js"></script>
+<script src="js/mic.js"></script>
+<script src="js/modal.js"></script>
+<script src="js/live.js"></script>
+<script src="js/gate.js"></script>
+<script src="js/tour.js"></script>
+<script src="js/tool-pairing.js"></script>
+<script src="js/tool-calibration.js"></script>
+<script src="js/tool-personalization.js"></script>
+<script src="js/tool-analytics.js"></script>
+<script src="js/dashboard.js"></script>
+</body>
+</html>

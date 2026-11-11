@@ -1,0 +1,41 @@
+/* responsive.css: phone-width refinements. Load this LAST so it overrides the page styles. */
+/* ===== phone ===== */
+/* Phone-width refinements (container <= 480px). Same design, tighter spacing, 44px tap targets, nothing wider than the screen. */
+@media (max-width:480px){
+  .screen{padding-block:16px 24px}
+  .top{margin-bottom:16px}
+  .brand-panel{padding:20px;gap:16px;border-radius:24px}
+  .brand-panel::after{display:none}
+  .brand-panel h1{font-size:26px}
+  .facts{gap:10px}.facts li{font-size:14px}
+  .form-card{padding:20px;border-radius:24px;gap:14px}
+  .form-card h2{font-size:24px!important}
+  .mode-head{margin:4px auto 20px}
+  .mode{padding:20px;min-height:0;border-radius:22px;gap:12px}
+  .mode h2{font-size:21px}
+  .mode .big{width:56px;height:56px;border-radius:18px}
+  .tile{min-height:0;padding:14px;border-radius:20px}
+  .tile h3{font-size:16px}
+  .tile .pill{padding:4px 8px;font-size:11.5px}
+  .dev{padding:10px}
+  .card{padding:12px;border-radius:16px}
+  .cta-row.stack .btn{min-width:170px}
+  .seg button,.link,.btn.sm,.switch,.icon-btn,.tabs button{min-height:44px}
+  .link.sm{margin-block:-12px}
+  .icon-btn{width:44px}
+  .pw button{height:44px;top:3px}
+  .sh-head{padding-top:14px}
+  .sh-body{gap:14px}
+  .kpi b{font-size:24px}
+  .hb{grid-template-columns:84px 1fr 40px}
+  select.input{font-size:16px}
+}
+@media (max-width:640px){
+  .live{position:fixed;inset:0;z-index:45;border:0;border-radius:0;box-shadow:none;display:none;padding-top:env(safe-area-inset-top,0px);background:var(--surface)}
+  .live.open{display:flex;animation:rise .28s cubic-bezier(.2,.8,.2,1) backwards}
+  .chat-back{display:grid}
+  .chat-log{max-height:none;min-height:0}
+  .convo-entry{display:flex}
+  .compose{padding-left:max(12px,env(safe-area-inset-left,0px));padding-right:max(12px,env(safe-area-inset-right,0px))}
+}
+/* ===== end phone ===== */

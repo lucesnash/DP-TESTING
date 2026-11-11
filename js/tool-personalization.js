@@ -1,0 +1,49 @@
+'use strict';
+/* tool-personalization.js: [Personalization]. Signer: quick corrections, mannerisms, few-shot update. Partner: reading and listening settings. */
+/* ===== Personalization (signer) ===== */
+function perSigner(){openModal('Personalization','Teach the gloves your signing',(root,api)=>{
+  const rows=[{h:'Water',c:64},{h:'Help',c:71},{h:'Please',c:68}].slice(0,Math.max(0,state.queued));
+  function draw(){root.innerHTML=`<div class="note">${icon('person','sm')}<span>The gloves learn from your confirmations and corrections. Only the last layer of the model changes, so updates are quick and stay on your hub glove.</span></div>
+  <div class="card"><div class="row sp"><b>Quick corrections</b><span class="pill ${rows.length?'warn':'ok'}">${rows.length?rows.length+' to review':'All reviewed'}</span></div>
+    <div class="list">${rows.length?rows.map((r,i)=>`<div class="item" style="flex-wrap:wrap"><div class="t"><b>Heard “${r.h}”</b><small>Confidence ${r.c}%, below your limit</small></div><div class="row"><button class="btn sm" data-yes="${i}">That's right</button><label class="sr" for="fx${i}">Correct sign</label><select class="input" id="fx${i}" data-fix="${i}" style="min-height:44px;width:auto"><option value="">Fix…</option>${VOC.filter(v=>v!==r.h).map(v=>`<option>${v}</option>`).join('')}</select></div></div>`).join(''):'<p class="muted">Nothing waiting. New low-confidence signs will appear here.</p>'}</div></div>
+  <div class="card"><b>Your mannerisms</b><p class="muted" style="font-size:14px;margin:0">These three settings tell the gloves how <em>you</em> sign, so they read your hands correctly. Tap "What is this for?" under each one.</p>
+    <div class="field"><label for="sp">Signing speed <span class="muted" id="spv"></span></label><small class="sub">How fast you usually sign.</small><input class="range" id="sp" type="range" min="0" max="100" value="${state.speed}" aria-describedby="spn">
+      <p class="now" id="spn" aria-live="polite"></p>
+      <details class="why"><summary>What is this for?</summary><div class="why-b">
+        <p><b>What it does.</b> Tells the gloves how quickly your hands move from one sign to the next, so they know where one sign ends and the next begins.</p>
+        <ol><li><b>Fast signers:</b> move it toward <b>Faster</b> if two signs get merged into one, or a quick sign is skipped.</li><li><b>Slower signers:</b> move it toward <b>Slower</b> if one sign shows up twice or is cut in the middle.</li><li>Not sure? Leave it on <b>Average</b> and use quick corrections below. The gloves will learn your pace.</li></ol></div></details></div>
+    <div class="field"><label for="hd">Hold time before a sign counts <span class="muted" id="hdv"></span></label><small class="sub">How long you keep a handshape still before it is accepted.</small><input class="range" id="hd" type="range" min="3" max="15" value="${state.hold*10}" aria-describedby="hdn">
+      <p class="now" id="hdn" aria-live="polite"></p>
+      <details class="why"><summary>What is this for?</summary><div class="why-b">
+        <p><b>What it does.</b> A short pause tells the gloves "this is a real sign", not just your hand moving on the way to another sign.</p>
+        <ol><li><b>Random words appear</b> while you move your hands, or you have hand tremor? Make the hold time <b>longer</b> (1.0 to 1.5 s).</li><li><b>Signs are missed</b> because you sign quickly? Make it <b>shorter</b> (0.3 to 0.5 s).</li><li>Try one sign, watch the result in the chat, then adjust by a small step.</li></ol></div></details></div>
+    <div class="field"><label for="th">Confidence limit <span class="muted" id="thv"></span></label><small class="sub">How sure the gloves must be before they add a word.</small><input class="range" id="th" type="range" min="50" max="95" value="${state.threshold}" aria-describedby="thn">
+      <p class="now" id="thn" aria-live="polite"></p>
+      <details class="why"><summary>What is this for?</summary><div class="why-b">
+        <p><b>What it does.</b> Every recognized sign gets a confidence score. If the score is below your limit, the gloves buzz and ask you to repeat instead of guessing a wrong word.</p>
+        <ol><li><b>Higher limit (80 to 95%):</b> fewer wrong words, but you will be asked to repeat more often.</li><li><b>Lower limit (50 to 65%):</b> fewer repeat requests, but more wrong words get through.</li><li>Most people are happy between <b>65 and 80%</b>.</li></ol></div></details></div></div>
+  <div class="card"><div class="row sp"><b>Update my model</b><span class="pill">Now v${state.modelVer}</span></div><p class="muted" style="font-size:14px">${state.corrections} corrections applied so far. A few-shot update uses your confirmed signs to tune the last layer.</p><div class="meter" id="um" hidden><i style="width:0"></i></div><p id="ut" class="muted" style="font-size:14px" aria-live="polite"></p><button class="btn primary block" id="upd">Update model on my hub glove</button></div>`;
+    const lab=()=>{const sp=['Slower','Slower','Average','Faster','Faster'][Math.min(4,Math.floor(state.speed/20))];$('#spv').textContent=sp;$('#hdv').textContent=state.hold.toFixed(1)+' s';$('#thv').textContent=state.threshold+'%';
+      $('#spn').textContent={Slower:'Now: the gloves expect slow, relaxed signing and wait a little longer between signs.',Average:'Now: tuned for an average signing pace. Fits most people.',Faster:'Now: the gloves expect quick signing and separate signs sooner.'}[sp];
+      $('#hdn').textContent=`Now: hold each sign still for about ${state.hold.toFixed(1)} s. ${state.hold<.6?'Quick to respond, but may catch signs in passing.':state.hold>1?'Very steady, but you must pause a bit longer on each sign.':'A balanced pause.'}`;
+      $('#thn').textContent=`Now: a sign scored ${state.threshold-2}% will ask you to repeat; a sign scored ${state.threshold}% or more is accepted.`};lab();
+    $('#sp').oninput=e=>{state.speed=+e.target.value;lab()};$('#hd').oninput=e=>{state.hold=e.target.value/10;lab()};$('#th').oninput=e=>{state.threshold=+e.target.value;lab()};
+    $$('[data-yes]').forEach(b=>b.onclick=()=>{const r=rows.splice(+b.dataset.yes,1)[0];DataService.saveCorrection({heard:r.h,confirmed:true,confidence:r.c});state.queued=rows.length;state.corrections++;toast('Confirmed. Saved for the next update');draw()});
+    $$('[data-fix]').forEach(s=>s.onchange=()=>{if(!s.value)return;const r=rows.splice(+s.dataset.fix,1)[0];DataService.saveCorrection({heard:r.h,corrected_to:s.value,confidence:r.c});state.queued=rows.length;state.corrections++;toast('Corrected to “'+s.value+'”');draw()});
+    $('#upd').onclick=()=>{if(!state.corrections){toast('Confirm or correct at least one sign first');return}$('#upd').disabled=true;$('#um').hidden=false;const S=['Collecting your confirmed signs…','Updating the last layer (few-shot)…','Quantizing to INT8…','Sending to the Right Hub Glove over Bluetooth…'];let i=0;const bar=$('#um i');
+      const id=api.every(()=>{$('#ut').textContent=S[i];bar.style.width=((i+1)/S.length*100)+'%';i++;if(i>S.length){clearInterval(id);const v=(parseFloat(state.modelVer)+.1).toFixed(1);state.modelVer=v;$('#ut').innerHTML=`<b style="color:var(--teal-ink)">Done. Model v${v} is on your glove.</b> Expected gain on your signs: +${rnd(1.2,3.1).toFixed(1)}%`;$('#upd').disabled=false;renderTiles()}},800)}}
+  draw()})}
+
+/* ===== Personalization (partner) ===== */
+function perPartner(){openModal('Personalization','Reading and listening settings',(root,api)=>{
+  root.innerHTML=`<div class="card"><div class="field"><label for="ts">Message text size <span class="muted" id="tsv"></span></label><input class="range" id="ts" type="range" min="90" max="160" value="${state.msgScale?state.msgScale*100:100}"></div><div class="bigtext" style="font-size:calc(22px * var(--msg-scale))" id="tsp">Yes, let's eat together.</div></div>
+  <div class="card"><div class="field"><label for="tr">Speech speed <span class="muted" id="trv"></span></label><input class="range" id="tr" type="range" min="6" max="14" value="${state.ttsRate*10}"></div><button class="btn sm" id="trt" style="justify-self:start">${icon('spk','sm')}Hear a sample</button></div>
+  <div class="card"><label class="lab" for="lg">Speech recognition language</label><select class="input" id="lg"><option value="auto">Auto: English and Tagalog</option><option value="en-US">English (US)</option><option value="en-PH">English (Philippines)</option><option value="fil-PH">Filipino</option></select><small class="muted">Used to turn your speech into text. Browser support varies.</small></div>
+  <div class="card"><b>Tone sensitivity</b><div class="seg" role="group" aria-label="Tone sensitivity" id="sg">${['Low','Medium','High'].map(s=>`<button aria-pressed="${state.sens===s}" data-s="${s}">${s}</button>`).join('')}</div><small class="muted">Higher sensitivity sends more buzzes to the signer's gloves.</small></div>
+  <div class="card"><div class="field"><label for="cc"><b>Clear the session cache</b></label><select class="input" id="cc"><option>When the session ends</option><option>After 1 hour</option><option>After 24 hours</option></select><small class="muted">Messages are never kept on a server.</small></div></div>`;
+  const l=()=>{$('#tsv').textContent=Math.round((state.msgScale||1)*100)+'%';$('#trv').textContent=state.ttsRate.toFixed(1)+'×'};l();
+  $('#ts').oninput=e=>{state.msgScale=e.target.value/100;document.documentElement.style.setProperty('--msg-scale',state.msgScale);l()};
+  $('#tr').oninput=e=>{state.ttsRate=e.target.value/10;l()};
+  $('#lg').value=state.lang||'auto';$('#lg').onchange=e=>{state.lang=e.target.value};
+  $('#trt').onclick=()=>{const w=state.ttsOn;state.ttsOn=true;speak('Hello, nice to meet you.');state.ttsOn=w;toast('Playing sample')};
+  $$('#sg button').forEach(b=>b.onclick=()=>{state.sens=b.dataset.s;$$('#sg button').forEach(x=>x.setAttribute('aria-pressed',x===b))})})}

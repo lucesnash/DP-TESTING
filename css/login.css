@@ -1,0 +1,19 @@
+/* login.css: Screen 1, log in / sign up */
+/* login */
+.login{display:grid;gap:20px;align-items:stretch;flex:1}
+@media (min-width:880px){.login{grid-template-columns:1.1fr .9fr;gap:28px}}
+.brand-panel{background:var(--deep);color:var(--on-deep);border-radius:28px;padding:28px;display:flex;flex-direction:column;gap:24px;justify-content:space-between;position:relative;overflow:hidden}
+.brand-panel::after{content:"";position:absolute;right:-60px;bottom:-60px;width:260px;height:260px;border-radius:50%;border:2px solid rgba(255,255,255,.1);box-shadow:0 0 0 36px rgba(255,255,255,.04),0 0 0 72px rgba(255,255,255,.03);pointer-events:none}
+.brand-panel h1{font-size:clamp(28px,4.4vw,44px);line-height:1.12;max-width:15ch}
+.facts{list-style:none;margin:0;padding:0;display:grid;gap:12px;position:relative;z-index:1}
+.facts li{display:flex;gap:12px;align-items:flex-start;font-size:15px}
+.facts .ic{margin-top:2px;color:#7FE0DB}
+.form-card{background:var(--surface);border-radius:28px;padding:28px;box-shadow:var(--shadow);display:flex;flex-direction:column;justify-content:center;gap:18px;border:1px solid var(--line)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface-2);padding:4px;border-radius:14px;gap:4px}
+.tabs button{min-height:42px;border:0;border-radius:11px;background:transparent;font-weight:700;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+.pw{position:relative}.pw .input{padding-right:76px}
+.pw button{position:absolute;right:6px;top:6px;height:38px;padding:0 12px;border:0;background:transparent;font-weight:700;color:var(--teal-ink);border-radius:10px}
+
+
+#s-login{display:flex;flex-direction:column}

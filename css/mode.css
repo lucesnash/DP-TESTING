@@ -1,0 +1,17 @@
+/* mode.css: Screen 2, role / mode selection */
+/* mode */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+.mode-head{max-width:720px;margin:12px auto 28px;text-align:center;display:grid;gap:10px}
+.mode-head h1{font-size:clamp(26px,4vw,38px)}
+.modes{display:grid;gap:16px;grid-template-columns:1fr;max-width:980px;margin-inline:auto}
+@media (min-width:760px){.modes{grid-template-columns:1fr 1fr}}
+.mode{text-align:left;background:var(--surface);border:2px solid var(--line);border-radius:26px;padding:26px;display:grid;gap:14px;transition:transform .18s,border-color .18s,box-shadow .18s;min-height:260px;align-content:start}
+.mode:hover{border-color:var(--teal);transform:translateY(-3px);box-shadow:var(--shadow)}
+.mode:active{transform:scale(.99)}
+.mode .big{width:64px;height:64px;border-radius:20px;display:grid;place-items:center;background:var(--teal-tint);color:var(--teal-ink)}
+.mode.b .big{background:var(--violet-tint);color:var(--violet)}
+.mode .big .ic{width:36px;height:36px}
+.mode h2{font-size:24px}
+.mode p{color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.go{display:inline-flex;align-items:center;gap:6px;font-weight:700;color:var(--teal-ink);margin-top:auto}

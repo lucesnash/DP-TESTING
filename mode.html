@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Smart Expressive Communication Band · Choose mode</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;500;600;700&family=Lexend:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/mode.css">
+<link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+<div class="page">
+<section class="screen wrap enter" id="s-mode" aria-labelledby="mode-h" tabindex="-1">
+  <div class="top">
+    <div class="logo"><div class="logo-mark" style="width:40px;height:40px"><svg class="ic sm" style="width:24px;height:24px"><use href="#i-hand"/></svg></div><b style="font-family:var(--f-display);font-size:15px;line-height:1.2">Communication<br>Band</b></div>
+    <div class="row"><button class="btn sm" id="how-m" type="button" aria-label="How to use this app"><span class="hq" aria-hidden="true">?</span><span class="lbl"> How to use</span></button><button class="icon-btn" data-theme-toggle aria-label="Switch light or dark theme"><svg class="ic"><use href="#i-moon"/></svg></button><button class="btn sm" id="logout">Log out</button></div>
+  </div>
+  <div class="mode-head"><p class="kicker">Step 2 of 2</p><h1 id="mode-h">How will you use the band today?</h1><p class="muted">You can switch at any time from the dashboard.</p></div>
+  <div class="modes">
+    <button class="mode a" data-mode="signer"><span class="big"><svg class="ic"><use href="#i-hand"/></svg></span><h2>Deaf / Mute Signer Mode</h2><p>Wear the gloves. See your signs as text, send and speak them, and feel your partner's tone as haptic cues.</p><span class="chips"><span class="pill ok">Gloves</span><span class="pill ok">Haptics</span><span class="pill ok">Text + voice out</span></span><span class="go">Open signer dashboard <svg class="ic sm"><use href="#i-arrow"/></svg></span></button>
+    <button class="mode b" data-mode="partner"><span class="big"><svg class="ic"><use href="#i-mic"/></svg></span><h2>Hearing Conversation Partner Mode</h2><p>Talk normally. Your speech becomes text for the signer, and their signs come back as text and audio.</p><span class="chips"><span class="pill vio">Speech to text</span><span class="pill vio">Text to speech</span><span class="pill vio">Tone cue</span></span><span class="go">Open partner dashboard <svg class="ic sm"><use href="#i-arrow"/></svg></span></button>
+  </div>
+</section>
+</div>
+<script src="js/utils.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/store.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/help.js"></script>
+<script src="js/mode.js"></script>
+</body>
+</html>
